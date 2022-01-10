@@ -28,17 +28,14 @@ using namespace std;
 #define S second
 #define all(a) a.begin(),a.end()
 
-int maxSubarray(vector<int>&arr){
-  int sum =0;
-  int maxi = INT_MIN;
-  for (auto it:arr){
-    sum += it;
-    maxi = max(sum, maxi);
-    if(sum<0){
-      sum = 0;
-    }
+int maxProfit(vector<int>&price){
+  int maxpro = 0;
+  int minprice = INT_MAX;
+  for (int i = 0; i < price.size(); i++){
+    minprice = min(minprice, price[i]);
+    maxpro = max(maxpro, price[i] - minprice);
   }
-  return maxi;
+  return maxpro;
 }
 
 int main(){
@@ -50,11 +47,12 @@ freopen("output.txt","w",stdout);
 
 int n;
 cin >> n;
-vector<int> arr(n);
-for(int i=0; i<n; i++){
-  cin >> arr[i];
+vector<int> v(n);
+for (int i = 0; i < n; i++){
+  cin >> v[i];
 }
-cout<<maxSubarray(arr);
+cout<< maxProfit(v);
+
 
 return 0;
 }
