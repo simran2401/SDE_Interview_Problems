@@ -28,25 +28,17 @@ using namespace std;
 #define S second
 #define all(a) a.begin(),a.end()
 
-void solve(vector<int> &arr) {
-  int low = 0;
-  int high = arr.size() - 1;
-  int mid = 0;
-
-  while(mid<=high){
-    switch(arr[mid]){
-      case 0:
-        swap(arr[low++], arr[mid++]);
-        break;
-      case 1:
-        mid++;
-        break;
-      case 2:
-        swap(arr[mid], arr[high--]);
-        break;
+int maxSubarray(vector<int>&arr){
+  int sum =0;
+  int maxi = INT_MIN;
+  for (auto it:arr){
+    sum += it;
+    maxi = max(sum, maxi);
+    if(sum<0){
+      sum = 0;
     }
   }
-  return;
+  return maxi;
 }
 
 int main(){
@@ -59,12 +51,10 @@ freopen("output.txt","w",stdout);
 int n;
 cin >> n;
 vector<int> arr(n);
-for (int i = 0; i < n; i++){
+for(int i=0; i<n; i++){
   cin >> arr[i];
 }
-solve(arr);
-for (int i = 0; i < arr.size(); i++){
-  cout << arr[i]<<" ";
-}
+cout<<maxSubarray(arr);
+
 return 0;
 }
